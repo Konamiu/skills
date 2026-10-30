@@ -1,0 +1,66 @@
+{
+  "title": "剧名",
+  "episode": 1,
+  "ratio": "9:16",
+  "style": "国漫厚涂风格的竖屏漫剧画面，电影感构图，柔和的体积光，色彩干净有层次，人物线条清晰，背景有景深虚化。",
+  "video_style": "",
+  "negative": "画面里不要任何文字、字幕、水印、logo 和边框；不要真实品牌的店招、商标和配色（如真实连锁便利店的条纹门头）；不要多余的手指和变形的五官；不要真实明星的脸",
+  "ambience": "",
+  "ambience_volume": 0.5,
+  "props": {},
+  "grade": "cinema",
+  "grain": 6,
+  "vignette": true,
+  "subtitles": true,
+  "ai_label": true,
+  "bgm": "",
+  "bgm_volume": 0.35,
+  "characters": {
+    "lin": {
+      "name": "林夏",
+      "lock": "二十出头的中国女生，黑色及肩直发，齐刘海，杏眼，左眼角一颗小泪痣，穿白色衬衫配浅蓝针织背心，身材纤细",
+      "voice": "zh-CN-XiaoyiNeural"
+    },
+    "gu": {
+      "name": "顾言",
+      "lock": "二十七八岁的中国男人，黑色短发微微后梳，眉眼冷峻，下颌线清晰，穿深灰色高定西装，白衬衫领口解开一颗扣子，身材高瘦",
+      "voice": "zh-CN-YunyangNeural"
+    }
+  },
+  "scenes": {
+    "office": {
+      "name": "总裁办公室",
+      "lock": "高层写字楼的总裁办公室，整面落地窗外是城市夜景，深色木质办公桌，冷白色的灯光，极简的装修"
+    }
+  },
+  "shots": [
+    {
+      "id": 1,
+      "duration": 3,
+      "size": "中景",
+      "camera": "缓推",
+      "scene": "office",
+      "characters": ["lin"],
+      "image": "林夏抱着一摞文件站在办公室门口，紧张地咬着嘴唇往里看",
+      "video": "林夏深吸一口气，抬手轻轻敲门，镜头缓慢推近她的脸",
+      "lines": [],
+      "caption": "入职第一天",
+      "sfx": []
+    },
+    {
+      "id": 2,
+      "duration": 3,
+      "size": "近景",
+      "camera": "固定",
+      "scene": "office",
+      "characters": ["gu"],
+      "image": "顾言坐在办公桌后面，背对落地窗，抬眼冷冷地看向镜头",
+      "video": "顾言放下手里的钢笔，抬起眼睛，嘴角没有一点笑意",
+      "lines": [
+        { "who": "gu", "text": "你迟到了三分钟。", "emotion": "冷漠" }
+      ],
+      "caption": "",
+      "sfx": []
+    }
+  ]
+}
