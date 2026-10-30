@@ -40,6 +40,17 @@ from pathlib import Path
 
 FFMPEG = os.environ.get("FFMPEG", "ffmpeg")
 FFPROBE = os.environ.get("FFPROBE", "ffprobe")
+
+
+def _config() -> dict:
+    """本机设置 ~/.config/manju/config.json：ComfyUI 地址、AutoDL 实例、各种模型放在哪。不进仓库。"""
+    try:
+        return json.loads((Path.home() / ".config" / "manju" / "config.json").read_text("utf-8"))
+    except (OSError, ValueError):
+        return {}
+
+
+CFG = _config()
 FPS = 24
 CANVAS = {"9:16": (1080, 1920), "16:9": (1920, 1080), "1:1": (1080, 1080), "3:4": (1080, 1440)}
 SHAPE = {"9:16": "9:16 竖图", "16:9": "16:9 横图", "1:1": "1:1 方图", "3:4": "3:4 竖图"}
@@ -709,7 +720,7 @@ def cmd_vo(a):
     print(f"✓ VO {count} 句（新生成 {generated} 句）")
 
 
-DEMUCS_PY = os.environ.get("MJ_DEMUCS_PY", str(Path.home() / "Desktop/Projects/kapi/data/tools/demucs-env/bin/python"))
+DEMUCS_PY = os.environ.get("MJ_DEMUCS_PY") or CFG.get("demucs_python") or "python3"  # 装了 demucs 的那个 python
 
 
 def cmd_redub(a):
@@ -719,6 +730,13 @@ def cmd_redub(a):
     ep = Ep(a.dir)
     if not ep.live:
         die("redub 只用于真人模式")
+    try:
+        has_demucs = subprocess.run([DEMUCS_PY, "-c", "import demucs"], capture_output=True).returncode == 0
+    except OSError:
+        has_demucs = False
+    if not has_demucs:
+        die("redub 要用 demucs 分出人声：找一个 python 装上 demucs（pip install demucs），"
+            "再把它的路径写进 ~/.config/manju/config.json 的 demucs_python")
     import comfy
     comfy.requests.packages.urllib3.disable_warnings()
     ids = parse_ids(a.segments)
@@ -2076,8 +2094,8 @@ def cmd_ambience(a):
 # ---------------------------------------------------------------- 自检
 
 def whisper_model() -> str | None:
-    for c in (os.environ.get("MJ_WHISPER_MODEL"),
-              *sorted(Path.home().glob("Desktop/Projects/kapi/data/models/ggml-large*.bin")),
+    for c in (os.environ.get("MJ_WHISPER_MODEL"), CFG.get("whisper_model"),
+              *sorted(Path.home().glob(".cache/whisper/ggml-large*.bin")),
               *sorted(Path.home().glob(".cache/whisper/ggml-*.bin"))):
         if c and Path(c).exists():
             return str(c)

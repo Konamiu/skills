@@ -89,8 +89,8 @@ Storyloom 把剧本写对，manju 把剧本拍出来。剧本定稿之前不出�
 - **manju**：
   - 交给它的是定稿的 `EPxx/剧本.md`，人物长相和声音、场景图都在它那边。
   - 剧本里新加的地点、道具、时间段（比如夜景），要提醒 manju 出对应的图。
-- **Kapi 剧集画布**：
+- **Kapi 剧集画布**（可选，没装 Kapi 就跳过）：
   - 只读 `故事图谱.json`。
-  - 设计说明在 `/Users/liudongdong/Desktop/Projects/kapi/docs/STORY-CANVAS.md`。
+  - 设计说明在 Kapi 项目的 `docs/STORY-CANVAS.md`。
   - 字段有增减时，两边一起改。
 - **大纲的维护**：怎么改、怎么标、一案接一案怎么不重复，见 [references/系列维护.md](references/系列维护.md)。
